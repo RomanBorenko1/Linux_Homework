@@ -1,11 +1,17 @@
 #!/bin/bash
-set -e
-PF=/opt/290724-ptm/Roman_Borenko/folder_2
 
-for i in {1..100}
-do
-        touch "$PF/$RANDOM"
+mkdir -p /opt/folder_1 /opt/folder_2
+
+for i in {1..100}; do
+    FILE="/opt/folder_1/$RANDOM.txt"
+    touch "$FILE"
+    NAME="${FILE##*/}"
+    NUMBER="${NAME%.txt}"
+    if [ $((NUMBER % 2)) -eq 0 ]; then
+        mv "$FILE" /opt/folder_2/
+    fi
 done
+
 
 
 
